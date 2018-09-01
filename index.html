@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Rotation Pozos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+
+    <link rel="stylesheet" media="screen" href="css/style.css">
+</head>
+
+<body>
+
+
+    <!-- particles.js container -->
+    <div id="particles-js">
+
+
+        <div id="myContainer"></div>
+        <form>
+            <title> Sales formular</title>
+            
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Name</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nicolas Tchinté">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Email address</label>
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect2">Selected products</label>
+                <select multiple class="form-control" id="exampleFormControlSelect2">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Total</label>
+                <div class="input-group">
+                    <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="10">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="validationTooltipUsernamePrepend">€</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Example textarea</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-warning" id="exampleFormControlInput1" value="validate" style="width:100%;">
+            </div>
+        </form>
+    </div>
+
+    <!-- Optional theme -->
+    <style>
+        .button-clicked {
+            background: red;
+        }
+    </style>
+    <script src="particles.js"></script>
+    <script src="js/app.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+
+    <!--<script src="js/function.js"></script>-->
+    <!-- stats.js -->
+    <!--<script src="js/lib/stats.js"></script>-->
+
+    <script type="text/javascript">
+        $(function () {
+            AnimateRotate();
+        });
+
+    </script>
+
+    <script type="text/javascript">
+
+        /*----------------------------------------- Config paramaters ------------------------------------------ */
+
+        var userCase = []; // List of all components
+
+        /* Firstly every component must be attached with her correspondant video data and a short description */
+
+        // POZOS tablet
+        var POZOStablbet = ['nom_POZOStablbet', 'urlvideo', 'description'];
+        // client device
+        var clientDevice = ['nom_clientDevice', 'urlvideo', 'description'];
+        // cash drawer
+        var cashDrawer = ['nom_cashDrawer', 'urlvideo', 'description'];
+        // printer
+        var printer = ['nom_printer', 'urlvideo', 'description'];
+        // customer screen
+        var customerScreen = ['nom_customerScreen', 'urlvideo', 'description'];
+        // online dashboard
+        var onlineDashboard = ['nom_onlineDashboard', 'urlvideo', 'description'];
+        // support
+        var support = ['nom_support', 'urlvideo', 'description'];
+        // kitchen screen
+        var kitchenScreen = ['nom_kitchenScreen', 'urlvideo', 'description'];
+        // codebar reader
+        var codebarReader = ['nom_codebarReader', 'urlvideo', 'description'];
+        // backup plan
+        var backupPlan = ['nom_backupPlan', 'urlvideo', 'description'];
+
+
+        // push component
+        userCase.push(POZOStablbet, clientDevice, cashDrawer, printer, customerScreen, onlineDashboard, support,
+            kitchenScreen, codebarReader, backupPlan);
+
+        // will be use to link the formular with the correspondant choices 
+        var userCaseChoice = [];  // content all components selected by the customer
+
+        /*------------------------------------------------------------------------------------------------------
+          ------------------------------------------------------------------------------------------------------ */
+
+        var html = '';
+
+        // paramater module central
+        var moduleCentralPositionLeft = 500;
+        var moduleCentralPositiontop = 400;
+        var modulePositionLeft = '600px';
+        var modulePositiontop = '600px';
+        var width = 300;
+        var height = 300;
+
+        // paramaters gravitated modules
+        var widthModule = 50;
+        var heightModule = 50;
+
+        // general variables
+        var radiusOfGravition = 300;
+        var initPosLeft = 0;
+        var initPostop = 0;
+        var MouseOver = false; // check the mouvement of the cursor relative at the modules	   
+
+        initModule(userCase.length);
+        /* 
+          Initialize the position and the associate css and start the gravitation
+        */
+
+        function initModule(nbre) {
+
+
+
+            // Create central module
+            html += '<div id ="moduleCentral" class="dropper" title="Info central">ModuleCentral</div>';
+
+            // create the gravitation module
+            for (var i = 0; i < nbre; i++) {
+
+                html += '<div class="draggable" id ="myAnimation' + i + '" title=" The attribute of title of all balise can display lot of information">' + userCase[i][0] + '</div>';
+                $("#myAnimation" + i).css({
+                    position: 'absolute',
+                    left: moduleCentralPositionLeft - widthModule / 2 + radiusOfGravition * Math.sin(3.14 * 2 * i / nbre),
+                    top: moduleCentralPositiontop - heightModule / 2 + radiusOfGravition * Math.cos(3.14 * 2 * i / nbre)
+                });
+            }
+
+            // Create central module
+            html += '<div id ="details" title="Info central">display details</div>';
+
+            // set all of them in the main div
+            $('#myContainer').html(html);
+            $('#myContainer').css({
+                width: 0,
+                height: 0,
+
+            });
+
+            for (var i = 0; i < nbre; i++) {
+                // apply css to the gravatation module
+                $('#myAnimation' + i).css({
+                    width: widthModule,
+                    height: heightModule,
+                    border: '1px solid LightGray',
+                    'border-radius': '5px',
+                    background: '#F5A9A9',
+                    'box-shadow': '0px 0px 3px black'
+
+                });
+            }
+            // apply css to the gravatation module
+
+            $('#details').css({
+                width: '300px',
+                height: '200px',
+                display: 'none',
+                background: '#81DAF5'
+
+            });
+
+            // must be removebox-
+            //$('div div').css('box-shadow','0px 0px 3px black');
+
+            // apply css to the central module
+            $('#moduleCentral').css({
+                width: width,
+                height: height,
+                'text-align': 'center',
+                position: 'absolute',
+                top: moduleCentralPositiontop - width / 2,
+                left: moduleCentralPositionLeft - height / 2,
+                background: 'green'
+            });
+
+            for (var i = 0; i < nbre; i++) {
+                gravitationEffet("#myAnimation" + i, "1.mp4", widthModule);
+            }
+
+        };
+
+        /*
+           Define the different event for all the modules
+        */
+        function gravitationEffet(module, urlVideo, dim) {
+
+            var pos = 0; // define the speed of the graviation
+
+            $(module)
+                .mouseenter(function () {
+                    MouseOver = true;
+                })
+                .hover(function () {
+
+                })
+                .mouseleave(function () {
+                    MouseOver = false;
+                    $("#details")
+                        .html('')
+                        .css({
+                            display: 'none'
+                        });
+                })
+                .click(function (event) {
+                    MouseOver = true;
+                    //var pos = AnimateRotate();
+                    var x = event.clientX;
+                    var y = event.clientY;
+
+                    $("#details")
+                        .html(' <video width="300" height="200" controls autoplay><source src="' + urlVideo + '" type="video/mp4"/></video>')
+
+                        .css({
+                            display: 'block'
+                        })
+                        .offset({
+                            left: dim / 2 + x,
+                            top: dim / 2 + y
+                        });
+
+                });
+
+        }
+
+        /*
+          start the gravitation effet
+        */
+        function AnimateRotate() {
+
+            var pos = 0;
+
+            var id = setInterval(frame, 10);
+            function frame() {
+                if (MouseOver == true) {
+
+                    // clearInterval(id);
+
+
+                } else {
+                    pos = pos + 0.001;
+                    for (var i = 1; i <= userCase.length; i++) {
+                        $("#myAnimation" + (i - 1))
+                            .offset({
+                                position: 'absolute',
+                                left: moduleCentralPositionLeft - widthModule / 2 + radiusOfGravition * Math.sin(3.14 * 2 * i / userCase.length + pos),
+                                top: moduleCentralPositiontop - heightModule / 2 + radiusOfGravition * Math.cos(3.14 * 2 * i / userCase.length + pos)
+                            });
+                    }
+
+                }
+                return pos;
+            }
+
+        }
+
+
+        /*
+           Drap and drop effet 
+        */
+        (function () {
+
+            var dndHandler = {
+
+                draggedElement: null, // property for the current element moved
+
+                applyDragEvents: function (element) {
+
+                    element.draggable = true;
+
+                    var dndHandler = this; // needed for the "dragstart" in order to facilitate the namespace "dndHandler"
+
+                    element.addEventListener('dragstart', function (e) {
+                        dndHandler.draggedElement = e.target; // save the current moved element
+                        e.dataTransfer.setData('text/plain', ''); //needed for Firefox
+                    }, false);
+
+                    element.addEventListener('drop', function (e) {
+                        e.stopPropagation(); // stop the progression to arret the drag
+                    }, false);
+
+                },
+
+                applyDropEvents: function (dropper) {
+
+                    dropper.addEventListener('dragover', function (e) {
+                        e.preventDefault(); // allow the drop of element
+                        this.className = 'dropper drop_hover'; //will be remove
+                    }, false);
+
+                    dropper.addEventListener('dragleave', function () {
+                        this.className = 'dropper'; // back to the defaults design when element is drop out
+                    });
+
+                    var dndHandler = this;
+                    dropper.addEventListener('drop', function (e) {
+
+                        var target = e.target,
+                            draggedElement = dndHandler.draggedElement, // Récupération de l'élément concerné
+                            clonedElement = draggedElement.cloneNode(true); // On créé immédiatement le clone de cet élément
+                        while (target.className.indexOf('dropper') == -1) { // Cette boucle permet de remonter jusqu'à la zone de drop parente
+                            target = target.parentNode;
+                        }
+
+                        target.className = 'dropper'; // Application du style par défaut
+                        //clonedElement = target.appendChild(clonedElement); // Ajout de l'élément cloné à la zone de drop actuelle
+                        //dndHandler.applyDragEvents(clonedElement); // Nouvelle application des événements qui ont été perdus lors du cloneNode()
+                        var text = $('#moduleCentral').html();
+
+                        $('#moduleCentral').html(text + " <br> " + '<button type="button"  class="btn btn-success" id=' + draggedElement.id + 'r' + '>' + clonedElement.innerHTML +
+                            '</button><button class="btn btn-danger" onclick="resetComponent()" id="test" ><i class="fas fa-times"></i></button>'
+                        );
+                        // draggedElement.parentNode.removeChild(draggedElement); // Suppression de l'élément d'origine
+                        draggedElement.style.display = "none";
+
+                    });
+
+                }
+
+            };
+
+            var elements = document.querySelectorAll('.draggable'),
+                elementsLen = elements.length;
+
+            for (var i = 0; i < elementsLen; i++) {
+                dndHandler.applyDragEvents(elements[i]); // Application des paramètres nécessaires aux élément déplaçables
+            }
+
+            var droppers = document.querySelectorAll('.dropper'),
+                droppersLen = droppers.length;
+
+            for (var i = 0; i < droppersLen; i++) {
+                dndHandler.applyDropEvents(droppers[i]); // Application des événements nécessaires aux zones de drop
+            }
+
+        })();
+        // restore defaults configuration of component
+        function resetComponent() {
+            /*var element = document.getElementById('test');
+            console.log(element);
+            element.setAttribute("color","red");
+            element.setAttribute("display", "none");
+            $('#test').css('display','none');
+            $('#test').prev().css('display','none');
+            console.log("ok");*/
+            var idComponent = $('#test').prev().attr('id');
+            idComponent = idComponent.substr(0, idComponent.length - 1);
+            console.log(idComponent);
+            $('#' + idComponent).css('display', 'block');
+            $('#test').prev().remove();
+            $('#test').remove();
+
+        }
+
+    </script>
+
+</body>
+
+</html>
