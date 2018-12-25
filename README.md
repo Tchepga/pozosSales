@@ -1,5 +1,5 @@
 # pozosSales
-javascript web script with  gravitation affect  and dynamic formula
+javascript web script with  gravitation affect  and dynamic form
 
 Library: 
 
